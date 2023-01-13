@@ -1,8 +1,16 @@
 
+//! # Calendar Calculator
+//!
+//! The calendar_calculator crate is a simple library crate that provides a range of functionalities for calculating distances
+//! between two dates expressed in str slice format, as well as adding different durations to a given date. With this crate,
+//! users can easily and quickly perform calculations related to dates and distances.
+
+
 use std::{fmt, io::{ErrorKind, self}};
 use chrono::{Duration, Weekday, Datelike, NaiveDateTime, Timelike, Months, Local};
 use regex::Regex;
 
+/// Express the distance between two given datetimes in a lot of different formats
 pub struct Distance {
     seconds: i64,
     minutes: i64,
@@ -97,62 +105,75 @@ fn num_saturdays(date1: NaiveDateTime, date2: NaiveDateTime) -> i64 {
 }
 
 pub trait CalendarCalculator {
+    /// check if a given &str date has Y-m-d H:M:S standard format
     fn to_date(self) -> Result<NaiveDateTime, io::Error>;
+    /// add n seconds to given &str datetime
     fn add_seconds(self, seconds: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n minutes to given &str datetime
     fn add_minutes(self, minutes: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n hours to given &str datetime
     fn add_hours(self, hours: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n days to given &str datetime
     fn add_days(self, days: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n weeks to given &str datetime
     fn add_weeks(self, weeks: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n months to given &str datetime
     fn add_months(self, months: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// add n years to given &str datetime
     fn add_years(self, years: i64) -> (i64, i64, i64, i64, i64, i64);
+    /// Calculate the distance between two given &str date, return a [`Distance`]
     fn distance_between(&self, second: &str) -> Distance;
 }
 
 impl CalendarCalculator for &str{
-    fn to_date(self) -> Result<NaiveDateTime, io::Error> {
+   
+    /// check if a given &str date has Y-m-d H:M:S standard format
+    fn to_date(self) -> Result<NaiveDateTime, io::Error> { 
         let re = Regex::new(r"(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})").unwrap();
 
         if !re.is_match(self) {
-            //return Err(Error::new(ErrorKind::Other, "Format Must Be Y-m-d H:M:S"));
             return Err(io::Error::new(ErrorKind::Other, "Format Must Be Y-m-d H:M:S"));
         }
-
         Ok(NaiveDateTime::parse_from_str(self, "%Y-%m-%d %H:%M:%S").unwrap())
-        
-        
-
-        
     }
 
-    fn add_seconds(self, seconds: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n seconds to given &str datetime
+    fn add_seconds(self, seconds: i64) -> (i64, i64, i64, i64, i64, i64) { 
         return_format(self.to_date().unwrap() + Duration::seconds(seconds))
     }
 
-    fn add_minutes(self, minutes: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n minutes to given &str datetime
+    fn add_minutes(self, minutes: i64) -> (i64, i64, i64, i64, i64, i64) { 
         return_format(self.to_date().unwrap() + Duration::minutes(minutes))
     }
 
-    fn add_hours(self, hours: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n hours to given &str datetime
+    fn add_hours(self, hours: i64) -> (i64, i64, i64, i64, i64, i64) { 
         return_format(self.to_date().unwrap() + Duration::hours(hours))
     }
 
-    fn add_days(self, days: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n days to given &str datetime
+    fn add_days(self, days: i64) -> (i64, i64, i64, i64, i64, i64) { 
         return_format(self.to_date().unwrap() + Duration::days(days))
     }
 
+    /// add n months to given &str datetime
     fn add_months(self, months: i64) -> (i64, i64, i64, i64, i64, i64) {
         return_format(self.to_date().unwrap().checked_add_months(Months::new(months as u32)).unwrap())
     }
 
-    fn add_weeks(self, weeks: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n weeks to given &str datetime
+    fn add_weeks(self, weeks: i64) -> (i64, i64, i64, i64, i64, i64) { 
         return_format(self.to_date().unwrap() + Duration::days(weeks*7))
     }
 
-    fn add_years(self, years: i64) -> (i64, i64, i64, i64, i64, i64) {
+    /// add n years to given &str datetime
+    fn add_years(self, years: i64) -> (i64, i64, i64, i64, i64, i64) { 
         let year = self.to_date().unwrap().year() as i64 + years;
         return_format(self.to_date().unwrap().with_year(year as i32).unwrap())
     }
-
+    
+    /// Calculate the distance between two given &str date, return a [`Distance`]
     fn distance_between(&self, second: &str) -> Distance{
         let mut date1 = self.to_date().unwrap();
         let mut date2 = second.to_date().unwrap();
