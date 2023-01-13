@@ -194,14 +194,14 @@ mod tests {
     #[test]
     fn distance(){
         //assert_eq!(1, first.distanceFrom(second));
-        let first = "2023-01-12 00:00:00";
+        let first = "2001-02-18 10:00:00";
         // let first = now();
         // let first = &first[..];
-        let second = "2024-05-08 00:00:00";
+        let second = "1997-07-12 10:00:00";
         println!("{}", first.distance_between(second));
-        assert_eq!(first.distance_between(second).days, 482);
-        assert_eq!(first.distance_between(second).sundays, 69);
-        assert_eq!(first.distance_between(second).saturdays, 69);
+        assert_eq!(first.distance_between(second).days, 1317);
+        assert_eq!(first.distance_between(second).sundays, 189);
+        assert_eq!(first.distance_between(second).saturdays, 189);
     }
 
     #[test]

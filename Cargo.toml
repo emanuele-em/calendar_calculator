@@ -1,11 +1,15 @@
 [package]
 name = "calendar_calculator"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["emanuele-em"]
-description = "The rust_calculator crate is a simple library crate that provides a range of functionalities for calculating distances between two dates expressed in str slice format, as well as adding different durations to a given date. With this crate, users can easily and quickly perform calculations related to dates and distances."
+description = "The calendar_calculator crate is a simple library crate that provides a range of functionalities for calculating distances between two dates expressed in str slice format, as well as adding different durations to a given date. With this crate, users can easily and quickly perform calculations related to dates and distances."
 license = "MIT OR Apache-2.0"
 keywords = ["date", "calculator", "datetime"]
+readme = "README.md"
+repository = "https://github.com/emanuele-em/calendar_calculator"
+categories = ["date-and-time"]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
