@@ -20,32 +20,35 @@ cargo add calendar_calculator
 ```rust
 use calendar_calculator::CalendarCalculator
 
+
+
 let n = 10;
-// return (2001, 02, 18, 10, 00, 10)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_seconds(n);
+let date = ("2023-01-12 00:00:00").parse().unwrap();
+// return StrToDate{2001, 02, 18, 10, 00, 10}
+let (y, m, d, hh, mm, ss) = date.add_seconds(n);
 
-// return (2001, 02, 18, 10, 10, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_minutes(n);
+// return StrToDate{2001, 02, 18, 10, 10, 00}
+let (y, m, d, hh, mm, ss) = date.add_minutes(n);
 
-// return (2001, 02, 18, 20, 10, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_hours(n);
+// return StrToDate{2001, 02, 18, 20, 10, 00}
+let (y, m, d, hh, mm, ss) = date.add_hours(n);
 
-// return (2001, 02, 28, 10, 00, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_days(n);
+// return StrToDate{2001, 02, 28, 10, 00, 00}
+let (y, m, d, hh, mm, ss) = date.add_days(n);
 
-// return (2001, 04, 29, 10, 00, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_weeks(n);
+// return StrToDate{2001, 04, 29, 10, 00, 00}
+let (y, m, d, hh, mm, ss) = date.add_weeks(n);
 
-// return (2001, 12, 18, 10, 00, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_months(n);
+// return StrToDate{2001, 12, 18, 10, 00, 00}
+let (y, m, d, hh, mm, ss) = date.add_months(n);
+
+// return StrToDate{2011, 02, 18, 10, 00, 00}
+let (y, m, d, hh, mm, ss) = date.add_years(n);
 
 // return (2011, 02, 18, 10, 00, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_years(n);
+let (y, m, d, hh, mm, ss) = date.add_years(n);
 
-// return (2011, 02, 18, 10, 00, 00)
-let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_years(n);
-
-// return struct Distance
+// return Distance
 // {
 //  seconds: 113788800,
 //  minutes: 1896480,
@@ -59,7 +62,7 @@ let (y, m, d, hh, mm, ss) = ("2001-02-18 10:00:00").add_years(n);
 //  working_days: 1128,
 // }
 
-println!({},("1997-07-12 10:00:00").distance_between("2001-02-18 10:00:00"));
+println!({},("1997-07-12 10:00:00").parse().unwrap().distance_between(date));
 ```
 
 ## Contributing
