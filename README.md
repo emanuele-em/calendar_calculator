@@ -59,6 +59,9 @@ println!({},("1997-07-12 10:00:00").parse().unwrap().distance_between(date));
 // }
 ```
 
+## Documentation
+[Docs.rs](https://docs.rs/calendar_calculator/0.3.0/calendar_calculator/)
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
