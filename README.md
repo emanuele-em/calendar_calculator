@@ -23,32 +23,28 @@ use calendar_calculator::CalendarCalculator
 
 
 let n = 10;
-let date = ("2023-01-12 00:00:00").parse().unwrap();
-// return StrToDate{2001, 02, 18, 10, 00, 10}
-let new_date = date.add_seconds(n);
+let date = ("2023-01-12 00:00:00")
+    .parse().unwrap(); // FromStr Trait Implemented
 
-// return StrToDate{2001, 02, 18, 10, 10, 00}
-let new_date = date.add_minutes(n);
+let now = StrDateTime::now(); // return now in StrDateTime format
 
-// return StrToDate{2001, 02, 18, 20, 10, 00}
-let new_date = date.add_hours(n);
+println!("{}", date.add_seconds(n)); // 2001-02-18 10:00:10
 
-// return StrToDate{2001, 02, 28, 10, 00, 00}
-let new_date = date.add_days(n);
+println!("{}", date.add_minutes(n)); // 2001-02-18 10:10:00
 
-// return StrToDate{2001, 04, 29, 10, 00, 00}
-let new_date = date.add_weeks(n);
+println!("{}", date.add_hours(n)); // 2001-02-18 20:10:00
 
-// return StrToDate{2001, 12, 18, 10, 00, 00}
-let new_date = date.add_months(n);
+println!("{}", date.add_days(n)); // 2001-02-28 10:00:00
 
-// return StrToDate{2011, 02, 18, 10, 00, 00}
-let new_date = date.add_years(n);
+println!("{}", date.add_weeks(n)); // 2001-04-29 10:00:00
 
-// return (2011, 02, 18, 10, 00, 00)
-let new_date = date.add_years(n);
+println!("{}", date.add_months(n)); // 2001-12-18 10:00:00
 
-// return Distance
+println!("{}", date.add_years(n)); // 2011-02-18 10:00:00
+
+println!("{}", date.add_years(n)); // 2011-02-18 10:00:00
+
+println!({},("1997-07-12 10:00:00").parse().unwrap().distance_between(date));
 // {
 //  seconds: 113788800,
 //  minutes: 1896480,
@@ -61,8 +57,6 @@ let new_date = date.add_years(n);
 //  saturdays: 189,
 //  working_days: 1128,
 // }
-
-println!({},("1997-07-12 10:00:00").parse().unwrap().distance_between(date));
 ```
 
 ## Contributing
